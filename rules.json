@@ -2,37 +2,175 @@
   {
     "id": 1,
     "priority": 1,
-    "action": { "type": "redirect", "redirect": { "extensionPath": "/blocked.html?what=tiktok" } },
-    "condition": { "requestDomains": ["tiktok.com"], "resourceTypes": ["main_frame"] }
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "extensionPath": "/blocked.html?what=tiktok"
+      }
+    },
+    "condition": {
+      "requestDomains": [
+        "tiktok.com"
+      ],
+      "resourceTypes": [
+        "main_frame"
+      ]
+    }
   },
   {
     "id": 2,
     "priority": 1,
-    "action": { "type": "block" },
-    "condition": { "requestDomains": ["tiktok.com", "tiktokcdn.com", "tiktokv.com", "tiktokcdn-us.com"], "resourceTypes": ["sub_frame", "script", "xmlhttprequest", "media"] }
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "requestDomains": [
+        "tiktok.com",
+        "tiktokcdn.com",
+        "tiktokv.com",
+        "tiktokcdn-us.com"
+      ],
+      "resourceTypes": [
+        "sub_frame",
+        "script",
+        "xmlhttprequest",
+        "media"
+      ]
+    }
   },
   {
     "id": 3,
     "priority": 1,
-    "action": { "type": "redirect", "redirect": { "extensionPath": "/blocked.html?what=shorts" } },
-    "condition": { "regexFilter": "^https?://([a-z0-9-]+\\.)?youtube\\.com/shorts([/?#]|$)", "resourceTypes": ["main_frame", "sub_frame"] }
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "extensionPath": "/blocked.html?what=shorts"
+      }
+    },
+    "condition": {
+      "regexFilter": "^https?://([a-z0-9-]+\\.)?youtube\\.com/shorts([/?#]|$)",
+      "resourceTypes": [
+        "main_frame",
+        "sub_frame"
+      ]
+    }
   },
   {
     "id": 4,
     "priority": 1,
-    "action": { "type": "block" },
-    "condition": { "regexFilter": "^https?://([a-z0-9-]+\\.)?youtube\\.com/youtubei/v1/reel/", "resourceTypes": ["xmlhttprequest", "other"] }
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "regexFilter": "^https?://([a-z0-9-]+\\.)?youtube\\.com/youtubei/v1/reel/",
+      "resourceTypes": [
+        "xmlhttprequest",
+        "other"
+      ]
+    }
   },
   {
     "id": 5,
     "priority": 1,
-    "action": { "type": "redirect", "redirect": { "extensionPath": "/blocked.html?what=reels" } },
-    "condition": { "regexFilter": "^https?://([a-z0-9-]+\\.)?instagram\\.com/([^/?#]+/)?reels?([/?#]|$)", "resourceTypes": ["main_frame", "sub_frame"] }
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "extensionPath": "/blocked.html?what=reels"
+      }
+    },
+    "condition": {
+      "regexFilter": "^https?://([a-z0-9-]+\\.)?instagram\\.com/([^/?#]+/)?reels?([/?#]|$)",
+      "resourceTypes": [
+        "main_frame",
+        "sub_frame"
+      ]
+    }
   },
   {
     "id": 6,
     "priority": 1,
-    "action": { "type": "redirect", "redirect": { "extensionPath": "/blocked.html?what=fbreels" } },
-    "condition": { "regexFilter": "^https?://([a-z0-9-]+\\.)?facebook\\.com/(reel|reels)([/?#]|$)", "resourceTypes": ["main_frame", "sub_frame"] }
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "extensionPath": "/blocked.html?what=fbreels"
+      }
+    },
+    "condition": {
+      "regexFilter": "^https?://([a-z0-9-]+\\.)?facebook\\.com/(reel|reels)([/?#]|$)",
+      "resourceTypes": [
+        "main_frame",
+        "sub_frame"
+      ]
+    }
+  },
+  {
+    "id": 7,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "extensionPath": "/blocked.html?what=threads"
+      }
+    },
+    "condition": {
+      "requestDomains": [
+        "threads.net",
+        "threads.com"
+      ],
+      "resourceTypes": [
+        "main_frame"
+      ]
+    }
+  },
+  {
+    "id": 8,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "requestDomains": [
+        "threads.net",
+        "threads.com"
+      ],
+      "resourceTypes": [
+        "sub_frame"
+      ]
+    }
+  },
+  {
+    "id": 9,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "extensionPath": "/blocked.html?what=x"
+      }
+    },
+    "condition": {
+      "requestDomains": [
+        "x.com",
+        "twitter.com"
+      ],
+      "resourceTypes": [
+        "main_frame"
+      ]
+    }
+  },
+  {
+    "id": 10,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "requestDomains": [
+        "x.com",
+        "twitter.com"
+      ],
+      "resourceTypes": [
+        "sub_frame"
+      ]
+    }
   }
 ]

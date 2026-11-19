@@ -4,6 +4,16 @@ const COPY = {
     line: "Completely blocked. Nothing to see here.",
     exit: ["Go somewhere useful", "https://www.google.com/"],
   },
+  threads: {
+    title: "Threads is off.",
+    line: "Completely blocked. Nothing to see here.",
+    exit: ["Go somewhere useful", "https://www.google.com/"],
+  },
+  x: {
+    title: "X is off.",
+    line: "Completely blocked. Nothing to see here.",
+    exit: ["Go somewhere useful", "https://www.google.com/"],
+  },
   shorts: {
     title: "No Shorts.",
     line: "YouTube still works. Shorts don't.",

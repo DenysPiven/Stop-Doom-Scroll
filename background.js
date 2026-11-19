@@ -5,6 +5,10 @@ const COVERED = [
   "*://*.youtube.com/*",
   "*://*.instagram.com/*",
   "*://*.facebook.com/*",
+  "*://*.threads.net/*",
+  "*://*.threads.com/*",
+  "*://*.x.com/*",
+  "*://*.twitter.com/*",
 ];
 
 chrome.runtime.onInstalled.addListener(async () => {

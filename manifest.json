@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Stop Doom Scroll",
   "version": "1.0.0",
-  "description": "Blocks TikTok entirely and removes YouTube Shorts, Instagram Reels and Facebook Reels.",
+  "description": "Blocks TikTok, Threads and X entirely and removes YouTube Shorts, Instagram Reels and Facebook Reels.",
   "icons": {
     "16": "icons/icon-16.png",
     "32": "icons/icon-32.png",
@@ -16,44 +16,84 @@
       "32": "icons/icon-32.png"
     }
   },
-  "permissions": ["declarativeNetRequest"],
+  "permissions": [
+    "declarativeNetRequest"
+  ],
   "host_permissions": [
     "*://*.tiktok.com/*",
     "*://*.youtube.com/*",
     "*://*.instagram.com/*",
-    "*://*.facebook.com/*"
+    "*://*.facebook.com/*",
+    "*://*.threads.net/*",
+    "*://*.threads.com/*",
+    "*://*.x.com/*",
+    "*://*.twitter.com/*"
   ],
-  "background": { "service_worker": "background.js" },
+  "background": {
+    "service_worker": "background.js"
+  },
   "declarative_net_request": {
     "rule_resources": [
-      { "id": "block_rules", "enabled": true, "path": "rules.json" }
+      {
+        "id": "block_rules",
+        "enabled": true,
+        "path": "rules.json"
+      }
     ]
   },
   "content_scripts": [
     {
-      "matches": ["*://*.youtube.com/*"],
-      "js": ["content/common.js", "content/youtube.js"],
-      "css": ["content/youtube.css"],
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "content/common.js",
+        "content/youtube.js"
+      ],
+      "css": [
+        "content/youtube.css"
+      ],
       "run_at": "document_start",
       "all_frames": false
     },
     {
-      "matches": ["*://*.instagram.com/*"],
-      "js": ["content/common.js", "content/instagram.js"],
-      "css": ["content/instagram.css"],
+      "matches": [
+        "*://*.instagram.com/*"
+      ],
+      "js": [
+        "content/common.js",
+        "content/instagram.js"
+      ],
+      "css": [
+        "content/instagram.css"
+      ],
       "run_at": "document_start"
     },
     {
-      "matches": ["*://*.facebook.com/*"],
-      "js": ["content/common.js", "content/facebook.js"],
-      "css": ["content/facebook.css"],
+      "matches": [
+        "*://*.facebook.com/*"
+      ],
+      "js": [
+        "content/common.js",
+        "content/facebook.js"
+      ],
+      "css": [
+        "content/facebook.css"
+      ],
       "run_at": "document_start"
     }
   ],
   "web_accessible_resources": [
     {
-      "resources": ["blocked.html", "blocked.css", "blocked.js", "icons/*"],
-      "matches": ["<all_urls>"]
+      "resources": [
+        "blocked.html",
+        "blocked.css",
+        "blocked.js",
+        "icons/*"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
     }
   ]
 }
