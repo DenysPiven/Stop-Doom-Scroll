@@ -7,6 +7,11 @@ div:has(> span > a[href="/reels/"]),
 
 /* Feed posts that are reels */
 article:has(a[href*="/reel/"]),
-article:has(a[href*="/reels/audio/"]) {
+article:has(a[href*="/reels/audio/"]),
+
+/* Reels shared in Direct messages */
+[role="main"] [role="article"]:has(svg[aria-label="Clip"]),
+[role="main"] [role="article"]:has(svg[aria-label="Reel"]),
+[role="main"] [role="article"]:has(svg[aria-label="Рілс"]) {
   display: none !important;
 }

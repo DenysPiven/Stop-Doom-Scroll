@@ -6,7 +6,7 @@ Chrome extension (Manifest V3) that removes short-form video feeds.
 | --- | --- |
 | TikTok | Fully blocked. Any `tiktok.com` page redirects to a block screen; embeds and scripts are blocked too. |
 | YouTube | Site works. Shorts are blocked everywhere: direct `/shorts/` links, in-app navigation, sidebar and bottom-bar buttons, shelves, tiles, channel tab, filter chips, and the Shorts player API. |
-| Instagram | Site works. Reels are blocked: `/reels/`, `/reel/<id>`, profile Reels tab, nav button, reel posts in the feed and grid tiles. |
+| Instagram | Site works. Reels are blocked: `/reels/`, `/reel/<id>`, profile Reels tab, nav button, reel posts in the feed, grid tiles, and reels shared in Direct messages. |
 | Facebook | Site works. `/reel/` and `/reels/` pages and reel links are blocked. |
 
 ## How it works
@@ -21,7 +21,9 @@ Chrome extension (Manifest V3) that removes short-form video feeds.
 2. Turn on **Developer mode**.
 3. Click **Load unpacked** and select this folder.
 
-After editing files, press the reload icon on the extension card and refresh open tabs.
+After editing files, press the reload icon on the extension card. Open YouTube, Instagram, Facebook and TikTok tabs refresh automatically.
+
+`./build.sh` packs the extension into `dist/stop-doom-scroll-<version>.zip`.
 
 ## Test checklist
 
