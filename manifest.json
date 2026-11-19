@@ -1,8 +1,21 @@
 {
   "manifest_version": 3,
   "name": "Stop Doom Scroll",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Blocks TikTok entirely and removes YouTube Shorts, Instagram Reels and Facebook Reels.",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "action": {
+    "default_title": "Stop Doom Scroll is on",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png"
+    }
+  },
   "permissions": ["declarativeNetRequest"],
   "host_permissions": [
     "*://*.tiktok.com/*",
@@ -39,7 +52,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["blocked.html", "blocked.css", "blocked.js"],
+      "resources": ["blocked.html", "blocked.css", "blocked.js", "icons/*"],
       "matches": ["<all_urls>"]
     }
   ]
