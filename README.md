@@ -23,7 +23,6 @@ Chrome extension (Manifest V3) that removes short-form video feeds.
 
 After editing files, press the reload icon on the extension card. Open YouTube, Instagram, Facebook and TikTok tabs refresh automatically.
 
-`./build.sh` packs the extension into `dist/stop-doom-scroll-<version>.zip`.
 
 ## Test checklist
 
