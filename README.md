@@ -19,12 +19,12 @@ Chrome extension (Manifest V3) that removes short-form video feeds.
 
 ## Install
 
-1. Open `chrome://extensions`.
-2. Turn on **Developer mode**.
-3. Click **Load unpacked** and select this folder.
+1. Download `stop-doom-scroll-<version>.zip` from the [latest release](https://github.com/DenysPiven/StopDoomScroll/releases/latest) and unzip it to a folder you'll keep (Chrome loads the extension from there).
+2. Open `chrome://extensions` and turn on **Developer mode** in the top-right corner.
+3. Click **Load unpacked** and select the unzipped `stop-doom-scroll` folder.
+4. Pin the extension icon to the toolbar.
 
-After editing files, press the reload icon on the extension card. Open tabs on covered sites refresh automatically.
-
+You can also `git clone` the repository and load that folder instead. After editing files, press the reload icon on the extension card; open tabs on covered sites refresh automatically.
 
 ## Test checklist
 
