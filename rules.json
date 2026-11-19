@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "priority": 1,
+    "action": { "type": "redirect", "redirect": { "extensionPath": "/blocked.html?what=tiktok" } },
+    "condition": { "requestDomains": ["tiktok.com"], "resourceTypes": ["main_frame"] }
+  },
+  {
+    "id": 2,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": { "requestDomains": ["tiktok.com", "tiktokcdn.com", "tiktokv.com", "tiktokcdn-us.com"], "resourceTypes": ["sub_frame", "script", "xmlhttprequest", "media"] }
+  },
+  {
+    "id": 3,
+    "priority": 1,
+    "action": { "type": "redirect", "redirect": { "extensionPath": "/blocked.html?what=shorts" } },
+    "condition": { "regexFilter": "^https?://([a-z0-9-]+\\.)?youtube\\.com/shorts([/?#]|$)", "resourceTypes": ["main_frame", "sub_frame"] }
+  },
+  {
+    "id": 4,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": { "regexFilter": "^https?://([a-z0-9-]+\\.)?youtube\\.com/youtubei/v1/reel/", "resourceTypes": ["xmlhttprequest", "other"] }
+  },
+  {
+    "id": 5,
+    "priority": 1,
+    "action": { "type": "redirect", "redirect": { "extensionPath": "/blocked.html?what=reels" } },
+    "condition": { "regexFilter": "^https?://([a-z0-9-]+\\.)?instagram\\.com/([^/?#]+/)?reels?([/?#]|$)", "resourceTypes": ["main_frame", "sub_frame"] }
+  },
+  {
+    "id": 6,
+    "priority": 1,
+    "action": { "type": "redirect", "redirect": { "extensionPath": "/blocked.html?what=fbreels" } },
+    "condition": { "regexFilter": "^https?://([a-z0-9-]+\\.)?facebook\\.com/(reel|reels)([/?#]|$)", "resourceTypes": ["main_frame", "sub_frame"] }
+  }
+]

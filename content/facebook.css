@@ -1,0 +1,5 @@
+a[href*="/reel/"],
+a[href*="/reels/"],
+[role="article"]:has(a[href*="/reel/"]) {
+  display: none !important;
+}

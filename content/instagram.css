@@ -1,0 +1,12 @@
+/* Nav entry, profile tab and reel tiles */
+a[href="/reels/"],
+a[href$="/reels/"],
+a[href*="/reel/"],
+div:has(> a[href="/reels/"]),
+div:has(> span > a[href="/reels/"]),
+
+/* Feed posts that are reels */
+article:has(a[href*="/reel/"]),
+article:has(a[href*="/reels/audio/"]) {
+  display: none !important;
+}
