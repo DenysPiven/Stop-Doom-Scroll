@@ -13,8 +13,9 @@
     "reelWatchEndpoint",
   ]);
 
-  // Item-level wrappers that are removed when they point at a Short.
-  const ITEM_KEYS = new Set([
+  // Item-level wrappers: removed when anything inside points at a Short
+  // (checked before their children are pruned, so empty shelves go too).
+  const MARKER_KEYS = new Set([
     "richItemRenderer",
     "richSectionRenderer",
     "videoRenderer",
@@ -22,15 +23,23 @@
     "compactVideoRenderer",
     "lockupViewModel",
     "gridShelfViewModel",
-    "shelfRenderer",
     "guideEntryRenderer",
     "pivotBarItemRenderer",
+    "videoWithContextRenderer",
+    "compactAutoplayRenderer",
+  ]);
+
+  // Containers that may mix Shorts with other content: removed only when
+  // their own label or header says "Shorts"; otherwise their children are pruned.
+  const LABEL_KEYS = new Set([
+    ...MARKER_KEYS,
+    "shelfRenderer",
+    "itemSectionRenderer",
     "chipCloudChipRenderer",
     "chipViewModel",
     "tabRenderer",
     "expandableTabRenderer",
-    "videoWithContextRenderer",
-    "compactAutoplayRenderer",
+    "searchFilterRenderer",
   ]);
 
   const SHORTS_MARKERS = [
@@ -45,17 +54,19 @@
   ];
 
   const SHORTS_LABELS = new Set(["shorts", "шортси", "шорты"]);
+  const SHORTS_HEADER = /"(content|simpleText|text|title)":"(shorts|шортси|шорты)"/i;
 
   const textOf = (t) =>
-    (t?.simpleText ?? t?.content ?? t?.runs?.map((r) => r.text).join("") ?? "")
+    (typeof t === "string"
+      ? t
+      : t?.simpleText ?? t?.content ?? t?.runs?.map((r) => r.text).join("") ?? ""
+    )
       .trim()
       .toLowerCase();
 
   const isShortsLabel = (v) =>
-    SHORTS_LABELS.has(textOf(v.title)) ||
-    SHORTS_LABELS.has(textOf(v.text)) ||
-    SHORTS_LABELS.has(textOf(v.formattedTitle)) ||
-    SHORTS_LABELS.has((v.title && typeof v.title === "string" ? v.title : "").trim().toLowerCase());
+    ["title", "text", "formattedTitle", "label"].some((k) => SHORTS_LABELS.has(textOf(v[k]))) ||
+    (v.header != null && SHORTS_HEADER.test(JSON.stringify(v.header)));
 
   const isShortsItem = (item) => {
     if (!item || typeof item !== "object" || Array.isArray(item)) return false;
@@ -63,20 +74,21 @@
     if (keys.length !== 1) return false;
     const key = keys[0];
     if (SHORTS_KEYS.has(key)) return true;
-    if (!ITEM_KEYS.has(key)) return false;
+    if (!LABEL_KEYS.has(key)) return false;
     const value = item[key];
-    if (value && typeof value === "object" && isShortsLabel(value)) return true;
-    if (value?.content?.richShelfRenderer?.isShorts) return true;
+    if (!value || typeof value !== "object") return false;
+    if (isShortsLabel(value)) return true;
+    if (!MARKER_KEYS.has(key)) return false;
+    if (value.content?.richShelfRenderer?.isShorts) return true;
     const json = JSON.stringify(value);
     return SHORTS_MARKERS.some((m) => json.includes(m));
   };
 
-  // Bottom-up walk: prune children first, then filter arrays.
   const prune = (node) => {
     if (Array.isArray(node)) {
       for (let i = node.length - 1; i >= 0; i--) {
-        prune(node[i]);
         if (isShortsItem(node[i])) node.splice(i, 1);
+        else prune(node[i]);
       }
     } else if (node && typeof node === "object") {
       for (const k in node) {
