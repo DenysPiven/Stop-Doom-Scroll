@@ -74,7 +74,8 @@
       const schedule = () => {
         if (scheduled) return;
         scheduled = true;
-        requestAnimationFrame(run);
+        // Throttled: at most a few sweeps per second, off the rendering path.
+        setTimeout(run, 400);
       };
       const start = () => {
         new MutationObserver(schedule).observe(document.documentElement, {

@@ -43,6 +43,12 @@
   },
   "content_scripts": [
     {
+      "matches": ["*://*.youtube.com/*"],
+      "js": ["content/youtube-main.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
       "matches": [
         "*://*.youtube.com/*"
       ],

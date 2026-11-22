@@ -14,6 +14,7 @@ Chrome extension (Manifest V3) that removes short-form video feeds.
 ## How it works
 
 - `rules.json` — `declarativeNetRequest` rules. Catch full page loads (typed URL, opened link, refresh) and redirect to `blocked.html`.
+- `content/youtube-main.js` — runs in the page before YouTube's scripts and strips Shorts from `ytInitialData` and `youtubei` API responses, so they are never rendered.
 - `content/common.js` — catches in-app (SPA) navigation via the Navigation API, `popstate` and URL polling; swallows clicks on blocked links; runs a DOM sweep on mutations.
 - `content/<site>.css` / `.js` — hides entry points and tiles per site.
 
