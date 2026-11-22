@@ -119,8 +119,36 @@
   // 2. API responses fetched while navigating or scrolling.
   const API = /\/youtubei\/v1\/(search|browse|next|guide|reel)/;
   const origFetch = window.fetch;
+  // New searches default to the "Videos" filter, so Shorts aren't even requested.
+  // Searches that already carry a filter (params) are left alone.
+  const SEARCH = /\/youtubei\/v1\/search/;
+  const VIDEOS_FILTER = "EgIQAQ%3D%3D";
+  const withVideosFilter = (body) => {
+    try {
+      const data = JSON.parse(body);
+      if (!data.query || data.params || data.continuation) return null;
+      data.params = VIDEOS_FILTER;
+      return JSON.stringify(data);
+    } catch {
+      return null;
+    }
+  };
+
   window.fetch = async function (input, init) {
-    const response = await origFetch.apply(this, arguments);
+    let args = arguments;
+    try {
+      const reqUrl = typeof input === "string" ? input : input?.url || String(input);
+      if (SEARCH.test(reqUrl)) {
+        if (typeof init?.body === "string") {
+          const body = withVideosFilter(init.body);
+          if (body) args = [input, { ...init, body }];
+        } else if (input instanceof Request && !init) {
+          const body = withVideosFilter(await input.clone().text());
+          if (body) args = [new Request(input, { body })];
+        }
+      }
+    } catch {}
+    const response = await origFetch.apply(this, args);
     try {
       const url = typeof input === "string" ? input : input?.url || String(input);
       if (!API.test(url) || !response.ok) return response;
@@ -144,7 +172,16 @@
   const xhrOpen = XMLHttpRequest.prototype.open;
   XMLHttpRequest.prototype.open = function (method, url) {
     this.__sdsApi = API.test(String(url));
+    this.__sdsSearch = SEARCH.test(String(url));
     return xhrOpen.apply(this, arguments);
+  };
+  const xhrSend = XMLHttpRequest.prototype.send;
+  XMLHttpRequest.prototype.send = function (body) {
+    if (this.__sdsSearch && typeof body === "string") {
+      const filtered = withVideosFilter(body);
+      if (filtered) return xhrSend.call(this, filtered);
+    }
+    return xhrSend.apply(this, arguments);
   };
   const desc = (name) => Object.getOwnPropertyDescriptor(XMLHttpRequest.prototype, name);
   const responseDesc = desc("response");

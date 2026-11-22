@@ -7,7 +7,7 @@ Chrome extension (Manifest V3) that removes short-form video feeds.
 | TikTok | Fully blocked. Any `tiktok.com` page redirects to a block screen; embeds and scripts are blocked too. |
 | Threads | Fully blocked (`threads.net`, `threads.com`), including embeds. |
 | X | Fully blocked (`x.com`, `twitter.com`), including embedded posts. `t.co` short links still resolve. |
-| YouTube | Site works. Shorts are blocked everywhere: direct `/shorts/` links, in-app navigation, sidebar and bottom-bar buttons, shelves, tiles, channel tab, filter chips, and the Shorts player API. |
+| YouTube | Site works. Shorts are blocked everywhere: direct `/shorts/` links, in-app navigation, sidebar and bottom-bar buttons, shelves, tiles, channel tab, filter chips, and the Shorts player API. Search defaults to the Videos filter, so Shorts are not even requested. |
 | Instagram | Site works. Reels are blocked: `/reels/`, `/reel/<id>`, profile Reels tab, nav button, reel posts in the feed, grid tiles, and reels shared in Direct messages. |
 | Facebook | Site works. `/reel/` and `/reels/` pages and reel links are blocked. |
 

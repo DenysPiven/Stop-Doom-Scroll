@@ -172,5 +172,34 @@
         "sub_frame"
       ]
     }
+  },
+  {
+    "id": 11,
+    "priority": 2,
+    "action": {
+      "type": "allow"
+    },
+    "condition": {
+      "regexFilter": "^https?://([a-z0-9-]+\\.)?youtube\\.com/results\\?(.*&)?sp=",
+      "resourceTypes": [
+        "main_frame"
+      ]
+    }
+  },
+  {
+    "id": 12,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "regexSubstitution": "\\1&sp=EgIQAQ%253D%253D"
+      }
+    },
+    "condition": {
+      "regexFilter": "^(https?://([a-z0-9-]+\\.)?youtube\\.com/results\\?.*)$",
+      "resourceTypes": [
+        "main_frame"
+      ]
+    }
   }
 ]
